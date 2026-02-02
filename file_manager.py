@@ -51,22 +51,16 @@ print(print_all_files_recursive(target_dir))
 
 
 # שאלה 6
-def print_all_files_recursive(target_path):
+def count_by_extension(path):
+    """מחזיר מילון עם ספירת קבצים לפי סיומת"""
     dict_files = {}
-    counter_py = 0
-    counter_txt = 0
-    counter_pdf = 0
-    for root, dirs, files in os.walk(target_path):
+    for root, dirs, files in os.walk(path):
         for filename in files:
-            if filename.endswith(".py"):
-                counter_py += 1
-            elif filename.endswith(".txt"):
-                counter_txt += 1
-            elif filename.endswith(".pdf"):
-                counter_pdf += 1
-    dict_files["files of python"] = counter_py
-    dict_files["files of pdf"] = counter_pdf
-    dict_files["files of txt"] = counter_txt
+            name, ext = os.path.splitext(filename)
+            if ext in dict_files:
+                dict_files[ext] += 1
+            else:
+                dict_files[ext] = 1
     return dict_files
 
 
